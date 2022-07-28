@@ -1,0 +1,68 @@
+<?php
+      if(isset($_GET['check'])){
+         $chkk=$mysqli->real_escape_string($_GET['check']);
+         $hsl=$mysqli->query("select * from tbl_service where invoice_number='$chkk' or serial_number='$chkk'");
+
+  while($h=$hsl->fetch_assoc()){
+   ?>
+   <div id="myModal"  class="modal fade">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+                     <label style="font-size: 20px; font-weight: bold;" >Status Service</label>
+                     <button type="button" class="close" data-dismiss="modal" href="index.php" aria-hidden="false">&times;</button>
+
+               </div>
+         
+         <table class="table">
+      <tr>
+         <td>Nama</td>
+         <td><?php echo " : "; echo $h['customer'] ?></td>
+      </tr>
+      <tr>
+         <td>Alamat</td>
+         <td><?php echo " : "; echo $h['address'] ?></td>
+      </tr>
+      <tr>
+         <td>Tlpn.</td>
+         <td><?php echo " : "; echo $h['phone'] ?></td>
+      </tr>
+      <tr>
+         <td>Barang.</td>
+         <td><?php echo " : "; echo $h['product']; echo '-'; echo $h['model']; echo'-'; echo $h['color']; ?></td>
+      </tr>
+      <tr>
+         <td>S.N.</td>
+         <td><?php echo " : "; echo $h['serial_number'] ?></td>
+      </tr>
+      <tr>
+         <td>Kerusakan</td>
+         <td><?php echo " : "; echo $h['problem'] ?></td>
+      </tr>
+      <tr style="color: red">
+         <td>Progres</td>
+         <td><?php echo " : "; echo $h['progres']; echo " %"; ?></td>
+      </tr> 
+      <tr>
+         <td>Estimasi</td>
+         <td><?php echo " : "; echo $h['estimation'] ?></td>
+      </tr>
+      <tr>
+         <td>Teknisi</td>
+         <td><?php echo " : "; echo $h['technisian'] ?></td>
+      </tr>
+
+      </table>
+       
+         
+      </div>
+   </div>
+</div>
+<?php
+     
+         
+  }
+
+   }
+   session_destroy();
+?> 
